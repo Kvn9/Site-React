@@ -1,0 +1,64 @@
+body{
+    margin-top: 300px;
+    
+}
+
+hr{
+    width: 200%;
+    background-color: black;
+}
+
+h3{
+    margin-right: 25px;
+}
+.Connexion{
+    margin-top: 120px;
+    text-align: right;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', Arial, Helvetica, sans-serif;
+    
+}
+
+button {
+    margin-top: 5px;
+    padding: 10px 5px 10px 10px;
+    border: 1px solid #c9c9c9;
+    outline-color: rgb(114, 2, 2);
+    border-radius: 10px;
+}
+
+.p2{
+    margin-right: 50px;
+}
+
+.Contenue{
+    margin-right: 45%;
+}
+label {
+    padding: 10px;
+}
+.label2 {
+    padding: 22px;
+}
+
+
+button {
+    background: #FBCA1F;
+    font-family: inherit;
+    padding: 0.6em 1.3em;
+    font-weight: 900;
+    font-size: 18px;
+    border: 3px solid black;
+    border-radius: 0.4em;
+    box-shadow: 0.1em 0.1em;
+}
+   
+   button:hover {
+    transform: translate(-0.05em, -0.05em);
+    box-shadow: 0.15em 0.15em;
+   }
+   
+   button:active {
+    transform: translate(0.05em, 0.05em);
+    box-shadow: 0.05em 0.05em;
+   }
+
