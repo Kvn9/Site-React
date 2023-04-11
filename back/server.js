@@ -195,6 +195,43 @@ app.post('/inscription', async (req, res) => {
     }
 })
 
+app.delete('/Del/:id', async(req,res) => {  
+
+const id = parseInt(req.params.id)    
+
+let conn;
+
+try{
+
+    console.log("lancement de la connexion")
+
+    conn = await pool.getConnection();
+
+    console.log("lancement de la requete")
+
+    // Supprimer un produit de la base de données en fonction de son ID
+
+    const rows = await conn.query ('DELETE FROM produit WHERE id = ?', [id]);
+
+    console.log(rows);
+
+    res.status(200).json(rows.affectedRows)
+
+}
+
+catch(err){
+
+    console.log(err)
+
+}
+
+})
+
+
+
+
+
+
 
 app.post('/admin', async (req, res) => {
     let conn;
@@ -212,6 +249,7 @@ app.post('/admin', async (req, res) => {
         console.log(err);
     }
 })
+
 app.delete('/admin', async(req,res) => { 
 
     const id = parseInt(req.params.id) 
@@ -233,6 +271,8 @@ app.delete('/admin', async(req,res) => {
      console.log(err)
     }
     })
+
+    
 
 
 // app.put('/question/:id', async (req, res) => {
