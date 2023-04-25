@@ -77,6 +77,7 @@ import React from 'react'
 import { useState } from 'react';
 import { useForm } from "react-hook-form";
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import '../style/Connecter.css';
 import { useNavigate } from "react-router-dom";
 
@@ -137,7 +138,7 @@ export default function Connexion() {
 
                 {(errors.email || errors.mdp) ? <span>Tous les champs doivent être remplis</span> : ""}
 
-                <input type="submit" />
+                <Link to="/"><input type='button' value='Envoyer'/></Link>
             </form>
         </div>
     )}

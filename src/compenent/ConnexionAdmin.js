@@ -55,6 +55,7 @@ export default function AjoutArticles() {
 
                 <input type="submit" />
                 <Link to="/Admin2"><input type='button' value='Ajouter un article'/></Link>
+                <Link to="/edit"><input type='button' value='Modifier un article'/></Link>
                 <Link to="/Delete"><input type='button' value='Supprimer un article'/></Link>
                 {/* <Link to="/Sup"><input type='button' value='Supprimer un article'/></Link> */}
             </form>

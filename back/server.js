@@ -112,7 +112,7 @@ app.post('/connexion2', async (req, res) => {
         conn = await pool.getConnection();
         console.log("lancement de la requete verification")
         console.log(req.body);
-        const rows = await conn.query('SELECT * FROM connexion WHERE email = ?' , [email]);
+        const rows = await conn.query('SELECT * FROM connexion WHERE email = ?' , [email,]);
         console.log(rows);
         if (rows.length === 1) {
             res.status(200).json ({message: "Connexion reussi ! "});
@@ -142,7 +142,7 @@ app.post('/connexion2', async (req, res) => {
     // }
 })
 
-app.post('/connexion', async (req, res) => {
+app.post('/connexion3', async (req, res) => {
     const id =parseInt(req.params.id)
     let conn;
     try {
@@ -203,35 +203,39 @@ let conn;
 
 try{
 
-    console.log("lancement de la connexion")
+console.log("lancement de la connexion")
 
-    conn = await pool.getConnection();
+conn = await pool.getConnection();
+console.log("lancement de la requete")
+ // Supprimer un produit de la base de données en fonction de son ID
+const rows = await conn.query ('DELETE FROM produit WHERE id = ?', [id]);
+ console.log(rows);
 
-    console.log("lancement de la requete")
-
-    // Supprimer un produit de la base de données en fonction de son ID
-
-    const rows = await conn.query ('DELETE FROM produit WHERE id = ?', [id]);
-
-    console.log(rows);
-
-    res.status(200).json(rows.affectedRows)
-
+ res.status(200).json(rows.affectedRows)
 }
 
 catch(err){
-
-    console.log(err)
-
+ console.log(err)
 }
-
 })
 
-
-
-
-
-
+app.put('/Modifier/:id', async (req, res) => {
+    const id = parseInt(req.params.id)
+    let conn;
+    try {
+        console.log("lancement de la connexion")
+        conn = await pool.getConnection();
+        console.log("lancement de la requete update")
+        let requete = 'UPDATE produit SET nom = ?, quantite = ?, prix = ?, img = ? WHERE id = ?;'
+        let rows = await conn.query(requete, [req.body.nom, req.body.quantite, req.body.prix, req.body.img, id]);
+        console.log(rows);
+        res.status(200).json(rows.affectedRows)
+    }
+    catch (err) {
+        console.log(err);
+    }
+})
+  
 
 app.post('/admin', async (req, res) => {
     let conn;

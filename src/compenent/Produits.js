@@ -457,7 +457,7 @@ export default function Quiz() {
     localStorage.setItem('panier', JSON.stringify(panier));
   
     // Redirection vers une nouvelle page
-    window.location.href = "/delete";
+    // window.location.href = "/delete";
   };
   
   const recup = async () => {
