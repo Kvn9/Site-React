@@ -31,14 +31,14 @@ app.use(cors())
 //     }
 // })
 
-app.get('/question/:id', async (req, res) => {
+app.get('/produit/:id', async (req, res) => {
     const id = parseInt(req.params.id)
     let conn;
     try {
         console.log("lancement de la connexion")
         conn = await pool.getConnection();
         console.log("lancement de la requete select")
-        const rows = await conn.query('SELECT * FROM questions WHERE id = ?', [id]);
+        const rows = await conn.query('SELECT * FROM produit WHERE id = ?', [id]);
         res.status(200).json(rows)
     }
     catch (err) {
