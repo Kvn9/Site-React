@@ -11,6 +11,7 @@ import Delete from './Delete';
 import Supprimer from './Supprimer';
 import Edit from './Edit';
 import Modifier from './Modifier';
+import NotFound from './NotFound';
 import { Route, Routes, Link } from "react-router-dom";
 import React, { useState } from 'react';
 
@@ -29,6 +30,7 @@ function App() {
         <Route path='/Del/:id' element= {<Supprimer/>} />
         <Route path='/edit' element={<Edit/>} />
         <Route path='/Modifier/:id' element={<Modifier/>} />
+        <Route path='"' element={<NotFound />} />
       </Routes>
       <Footer/>
     </div>

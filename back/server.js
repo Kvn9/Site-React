@@ -10,7 +10,7 @@ const pool = mariadb.createPool ({ // Création de la pool de connexions à la b
     host: process.env.DB_HOST, // récupération de l'adresse de l'hôte de la base de données depuis les variables d'environnement
     user: process.env.DB_USER, // récupération de l'utilisateur de la base de données depuis les variables d'environnement
     password: process.env.DB_PWD, // récupération du mot de passe de la base de données depuis les variables d'environnement
-    database: process.env.DB_DTB // récupération du nom de la base de données depuis les variables d'environnement
+    database: process.env.DB_DTB, // récupération du nom de la base de données depuis les variables d'environnement
 });
 
 
@@ -68,6 +68,20 @@ app.get('/produit', async(req,res) => {
     }
   })
 
+  app.get('produit/:id', async(req,res) => {
+    let conn;
+    const id = parseInt(req.params.id);
+    try{
+        console.log("lancement de la connexion");
+        conn = await pool.getConnection();
+        console.log("lancement de la requete");
+        const rows = await conn.query('SELECT * FROM produit WHERE id= ?', [id]);
+        res.status(200).json(rows)
+    }
+    catch(err) {
+        console.log(err);
+    }
+  })
   
 app.post('/', async (req, res) => {
     let conn;

@@ -107,16 +107,16 @@ export default function Connexion() {
                 alert("Connexion réussie") // Affichage d'une alerte pour informer l'utilisateur que la connexion est réussie
 
                 ls.setItem ("email", res.data.email);
-                // ls.setItem ("role", res.data.role);
+                 ls.setItem ("role", res.data.role);
                 console.log(res.data)
 
-                // if (res.data.role === 1 ){
-                //     navigate("/Admin"); // Redirection vers la page d'accueil
-                // }
+                 if (res.data.role === 1 ){
+                     navigate("/Admin2"); // Redirection vers la page admin
+                 }
 
-                // if (res.data.role === 0){
-                //     navigate("/produits"); // Redirection vers la page d'accueil
-                // }
+                 if (res.data.role === 0){
+                     navigate("/Admin"); // Redirection vers la page d'accueil
+                 }
             }
             else { // Sinon, la connexion a échoué
                 alert("Erreur de connexion") // Affichage d'une alerte pour informer l'utilisateur que la connexion a échoué

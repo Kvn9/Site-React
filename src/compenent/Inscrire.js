@@ -4,8 +4,6 @@ import { useForm } from "react-hook-form";
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 
-
- 
 function valider(e){
   e.preventDefault()
   /* en js la fonction preventDefault permet d'indiquer à l'utilisateur
