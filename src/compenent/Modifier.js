@@ -14,188 +14,103 @@ import axios from 'axios';
 
 
 export default function ModifierArticles() {
+    
+    const { handleSubmit, formState: { errors } } = useForm();
+    let { id } = useParams();
+     let navigate = useNavigate();
 
-    const { handleSubmit, formState: { errors } } = useForm();
+ // Fonction pour supprimer la question en envoyant une requête DELETE au backend
 
-    let { id } = useParams();
+    const ModifierArticles = async () => {
 
-    let navigate = useNavigate();
+        await axios.put(`http://localhost:8000/Modifier/` + id)
 
+         .then(res => {
+    
+        console.log(res);
 
+    setNom(res.data[0].nom)
+    setPrix(res.data[0].prix)
+    setQuantite(res.data[0].quantite)
+    
+    if (res.status === 200) {
+         alert("Modification réussie");
+         navigate("/produits");
 
+     }
 
-    // Fonction pour supprimer la question en envoyant une requête DELETE au backend
+ else {
+ alert("Erreur de modification");
+ }
 
-    const ModifierArticles = async () => {
+ });
 
-        await axios.put(`http://localhost:8000/Modifier/` + id)
+}
+ const [nom, setNom] = useState("")
+ const [img, setImg] = useState("")
+ const [prix, setPrix] = useState("")
+ const [quantite, setQuantite] = useState("")
 
-            .then(res => {
 
-                console.log(res);
+ const editQuestion = async () => {
+    await axios.put(`http://localhost:8000/Modifier/` + id, {
+    nom: nom,
+    img: img,
+    prix: prix,
+    quantite: quantite,
+ })
+ .then(res => {
+     console.log(res)
+    if (res.status === 200) {
+     alert("Modification réussi")
+    navigate("/");
+}
 
-                setNom(res.data[0].nom)
+else {
 
-                setPrix(res.data[0].prix)
+ alert("Erreur d'envoi")
 
-                setQuantite(res.data[0].quantite)
 
-                if (res.status === 200) {
+}
 
-                    alert("Modification réussie");
+ })
 
-                    navigate("/produits");
+}
 
-                }
+    useEffect(() => {   
+     ModifierArticles()
 
-                else {
+ }, [])
 
-                    alert("Erreur de modification");
+ return (
 
-                }
+    <div className='container'>
 
-            });
+ <h2> Modifier un Article </h2> 
 
-    }
+ <form onSubmit={handleSubmit(editQuestion)}> 
 
+ <label>Nom </label> 
+ <input defaultValue={nom} onChange={(e) => setNom(e.target.value)} /> 
 
-    const [nom, setNom] = useState("")
+ <label>Image </label>
+ <input defaultValue={img} onChange={(e) => setImg(e.target.value)} />
 
+ <label>Prix </label>
+ <input defaultValue={prix} onChange={(e) => setPrix(e.target.value)} />
 
+ <label>Quantité </label> 
+ <input defaultValue={quantite} onChange={(e) => setQuantite(e.target.value)} />
 
-
-    const [img, setImg] = useState("")
-
-
-
-
-    const [prix, setPrix] = useState("")
-
-
-
-
-    const [quantite, setQuantite] = useState("")
-
-
-        const editQuestion = async () => {
-
-
-
-
-                await axios.put(`http://localhost:8000/Modifier/` + id, {
-
-
-                    nom: nom,
-
-
-                    img: img,
-
-
-                    prix: prix,
-
-                    quantite: quantite,
-
-
-
-
-       
-
-                })
-
-
-
-
-                    .then(res => {
-
-
-
-
-                            console.log(res)
-
-           
-
-                            if (res.status === 200) {
-
-           
-
-                                alert("Modification réussi")
-
-           
-
-                                navigate("/");
-
-           
-
-                            }
-
-           
-
-                            else {
-
-           
-
-                                alert("Erreur d'envoi")
-
-           
-
-                            }
-
-           
-
-                        })
-
-           
-
-                }
-
-           
-
-               
-
-           
-
-                useEffect(() => {
-
-           
-
-                        ModifierArticles()
-
-           
-
-                }, [])
-
-    return (
-
-        <div className='container'>
-
-                    <h2> Modifier un Article </h2>        
-
-                    <form onSubmit={handleSubmit(editQuestion)}>        
-
-                        <label>Nom </label>        
-                        <input defaultValue={nom} onChange={(e) => setNom(e.target.value)} />          
-
-                        <label>Image </label>
-                                <input defaultValue={img} onChange={(e) => setImg(e.target.value)} />
-
-                        <label>Prix </label>        
-                        <input defaultValue={prix} onChange={(e) => setPrix(e.target.value)} />
-
- <label>Quantité </label>        
- <input defaultValue={quantite} onChange={(e) => setQuantite(e.target.value)} />            
-
- {(errors.Nom || errors.Img || errors.Prix || errors.Quantite) ? <span>Tous les champs doivent être remplis</span> : ""}        
+ {(errors.Nom || errors.Img || errors.Prix || errors.Quantite) ? <span>Tous les champs doivent être remplis</span> : ""} 
 
  <input type="submit" />
+</form>
 
-       
 
-                    </form>
 
-       
+ </div>
 
-                </div>
-
-    )
+ )
 
 }

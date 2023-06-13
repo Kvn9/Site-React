@@ -9,61 +9,56 @@ import axios from 'axios';
 
 export default function SuppressionQuestion() {
 
-    const { handleSubmit } = useForm();
+    const { handleSubmit } = useForm();
 
-    let { id } = useParams();
+     let { id } = useParams();
 
-    let navigate = useNavigate();
-
-
+     let navigate = useNavigate();
 
 
-    // Fonction pour supprimer la question en envoyant une requête DELETE au backend
 
-    const suppressionQuestion = async () => {
 
+ // Fonction pour supprimer la question en envoyant une requête DELETE au backend
+    const suppressionQuestion = async () => {
  await axios.delete(`http://localhost:8000/Del/` + id)
 
 .then(res => {
 
 console.log(res);
 
-                if (res.status === 200) {
+    if (res.status === 200) {
 
-                    alert("Suppression réussie");
+     alert("Suppression réussie");
 
-                    navigate("/");
+     navigate("/");
+     }
 
-                }
+     else {
 
-                else {
+     alert("Erreur de suppression");
 
-                    alert("Erreur de suppression");
+     }
 
-                }
+    });
 
-            });
+     }
 
-    }
+  return (
 
-   
+        <div className='container' style={{ marginTop:'200px'}}>
 
-    return (
+    <form onSubmit={handleSubmit(suppressionQuestion)} >
 
-        <div className='container' style={{ marginTop:'200px'}}>
+        <h2> Êtes-vous sûr de vouloir supprimer l'article ?</h2>
 
-            <form onSubmit={handleSubmit(suppressionQuestion)} >
+    <input type="submit" value="Valider" />
 
-                <h2> Êtes-vous sûr de vouloir supprimer l'article ?</h2>
+         <Link to="/" className='bouton-annuler'> Annuler </Link>
 
-                <input type="submit" value="Valider" />
+     </form>
 
-                <Link to="/" className='bouton-annuler'> Annuler </Link>
+ </div>
 
-            </form>
-
-        </div>
-
-    )
+  )
 
 }

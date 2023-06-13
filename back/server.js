@@ -112,10 +112,16 @@ app.post('/connexion2', async (req, res) => {
         conn = await pool.getConnection();
         console.log("lancement de la requete verification")
         console.log(req.body);
-        const rows = await conn.query('SELECT * FROM connexion WHERE email = ?' , [email,]);
+        const rows = await conn.query('SELECT * FROM connexion WHERE email = ?' ,[email]);
         console.log(rows);
+        console.log("connexion2",rows[0].mdp);
+        const match = await  bcrypt.compare(mdp, rows[0].mdp);
+        console.log(match);
+
         if (rows.length === 1) {
-            res.status(200).json ({message: "Connexion reussi ! "});
+
+            const role = rows[0].role;
+            res.status(200).json({ id: rows[0].id, email: rows[0].email, role });            
         }
         else {
             console.log("pas correct")
@@ -131,15 +137,15 @@ app.post('/connexion2', async (req, res) => {
             conn.release();
         }
     }
-    // const match = await  bcrypt.compare(mdp, rows[0].mdp);
-    // console.log(match);
+    const match = await  bcrypt.compare(mdp, rows[0].mdp);
+    console.log(match);
 
-    // if(match) {
+    if(match) {
         
-    // }
-    // else {
+    }
+    else {
 
-    // }
+    }
 })
 
 app.post('/connexion3', async (req, res) => {
@@ -219,23 +225,23 @@ catch(err){
 }
 })
 
-app.put('/Modifier/:id', async (req, res) => {
-    const id = parseInt(req.params.id)
-    let conn;
-    try {
-        console.log("lancement de la connexion")
-        conn = await pool.getConnection();
-        console.log("lancement de la requete update")
-        let requete = 'UPDATE produit SET nom = ?, quantite = ?, prix = ?, img = ? WHERE id = ?;'
-        let rows = await conn.query(requete, [req.body.nom, req.body.quantite, req.body.prix, req.body.img, id]);
-        console.log(rows);
-        res.status(200).json(rows.affectedRows)
-    }
-    catch (err) {
-        console.log(err);
-    }
-})
-  
+
+    app.put('/Modifier/:id', async (req, res) => {
+        const id = parseInt(req.params.id)
+        let conn;
+        try {
+            console.log("lancement de la connexion")
+            conn = await pool.getConnection();
+            console.log("lancement de la requete update")
+            let requete = 'UPDATE produit SET nom = ?, quantite = ?, prix = ?, img = ? WHERE id = ?;'
+            let rows = await conn.query(requete, [req.body.nom, req.body.quantite, req.body.prix, req.body.img, id]);
+            console.log(rows);
+            res.status(200).json(rows.affectedRows)
+        }
+        catch (err) {
+            console.log(err);
+        }
+    })
 
 app.post('/admin', async (req, res) => {
     let conn;
@@ -312,6 +318,7 @@ app.delete('/admin', async(req,res) => {
 //         console.log(err);
 //     }
 // })
+
 
 app.listen(8000, () => { // ouverture du serveur sur le port 8000
     console.log("Serveur à l'écoute") // afficher un message dans la console.

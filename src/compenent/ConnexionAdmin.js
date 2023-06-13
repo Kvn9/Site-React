@@ -54,9 +54,11 @@ export default function AjoutArticles() {
                 {(errors.nom || errors.img || errors.prix) ? <span>Tous les champs doivent être remplis</span> : ""}
 
                 <input type="submit" />
-                <Link to="/Admin2"><input type='button' value='Ajouter un article'/></Link>
-                <Link to="/edit"><input type='button' value='Modifier un article'/></Link>
-                <Link to="/Delete"><input type='button' value='Supprimer un article'/></Link>
+                <Link to="/Admin2"><input type='submit' value='Ajouter un article'/></Link>
+                <Link to="/edit"><input type='submit' value='Modifier un article'/></Link>
+                <Link to="/Delete"><input type='submit' value='Supprimer un article'/></Link>
+                {/* <Link to="/EditUser"><input type='submit' value='Modifier un Utilisateur'/></Link>
+                <Link to="/DeleteUser"><input type='submit' value='Supprimer un Utilisateur'/></Link> */}
                 {/* <Link to="/Sup"><input type='button' value='Supprimer un article'/></Link> */}
             </form>
         </div>
