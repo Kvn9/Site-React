@@ -13,4 +13,4 @@
 <strong>Technologies utilisées 🛠️ :</strong>
 Le site est développé en utilisant React pour la partie front-end. Pour la gestion des données, une API RESTful est mise en place avec Node.js 🚀 .
 
-Ce projet a été développé en suivant les meilleures pratiques de développement web, avec une attention particulière portée à la performance, à la sécurité et à l'expérience utilisateur. 💼🚀
+Ce projet a été développé en suivant les meilleures pratiques de développement web, avec une attention particulière portée à la performance, à la sécurité et à l'expérience utilisateur. 💼🚀 
