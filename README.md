@@ -1,3 +1,5 @@
+Site React - Boutique en ligne 🌐🛒
+
 <strong>Site-React</strong> 🌐 est un site web dynamique développé en utilisant React, conçu pour offrir une expérience utilisateur intuitive et conviviale. Il s'agit d'une boutique en ligne 🛒 qui propose une gamme de produits.
 
 <strong>Caractéristiques principales</strong> 🚀 :
